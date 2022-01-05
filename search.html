@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    
+
+<style>
+    th{ 
+        cursor: pointer;
+        color:#fff;
+            }
+</style>
+<div style="text-align: center"><h2 style="margin-top:30px;"><u>Search Application</u></h2></div>
+<div style="margin: auto; text-align: center;margin:40px 0px;">
+<input type="text" id="search-input" class="bg-dark shadow-3 text-white"  placeholder="Search" autofocus style="width: 1000px;padding: 6px 20px;"/>
+</div>
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th  class="bg-info" data-colname="name" data-order="desc">Id</th>
+        <th  data-colname="age" data-order="desc">Name</th>
+        <th  data-colname="birthdate" data-order="desc">Username</th>
+        <th  class="bg-info" data-colname="name" data-order="desc">Email</th>
+        <th  data-colname="age" data-order="desc">Street</th>
+        <th  data-colname="birthdate" data-order="desc">City</th>
+        <th  data-colname="age" data-order="desc">Birthday</th>
+        <th  data-colname="birthdate" data-order="desc">Age</th>
+    </tr>
+    <tbody id="myTable">
+        
+    </tbody>
+</table>
+
+
+<script>
+var myArray = [
+{
+    "id": 1,
+    "name": "Clementine Bauch",
+    "username": "Samantha",
+    "email": "Nathan@yesenia.net",
+      "street": "Douglas Extension",
+      "city": "McKenziehaven",
+      'age':'30', 'birthdate':'11/10/1989',
+      },
+      {
+    "id": 2,
+    "name": "Ervin Howell",
+    "username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "street": "Douglas Extension",
+      "city": "Wisokyburgh",
+      'age':'30', 'birthdate':'11/10/1989',
+      },
+    {"id": 3,'name':'Michael', 'age':'30', 'birthdate':'11/10/1989',"username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "street": "Douglas Extension",
+      "city": "Wisokyburgh",},
+    {"id": 4,'name':'Mila', 'age':'32', 'birthdate':'10/1/1989',"username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "street": "Douglas Extension",
+      "city": "Wisokyburgh",},
+    {"id": 5,'name':'Paul', 'age':'29', 'birthdate':'10/14/1990',"username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "street": "Douglas Extension",
+      "city": "Wisokyburgh",},
+    {"id": 6,'name':'Dennis', 'age':'25', 'birthdate':'11/29/1993',"username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "street": "Douglas Extension",
+      "city": "Wisokyburgh",},
+    {"id": 7,'name':'Tim', 'age':'27', 'birthdate':'3/12/1991',"username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "street": "Douglas Extension",
+      "city": "Wisokyburgh",},
+    {"id": 8,'name':'Erik', 'age':'24', 'birthdate':'10/31/1995',"username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "street": "Douglas Extension",
+      "city": "Wisokyburgh",},
+]
+
+
+$('#search-input').on("keyup",function(){
+    //// check value form input field 
+    var value = $(this).val();
+    console.log('Value: ', value)
+
+    var data = searchTable(value , myArray)
+    buildTable(data)
+})
+
+buildTable(myArray);
+
+function searchTable(value, data){
+    var filteredData = []
+
+    for(var i=0; i< data.length; i++){
+        value = value.toLowerCase();
+        var name = data[i].name.toLowerCase()
+        if(name.includes(value)){
+            filteredData.push(data[i])
+        }
+    }
+    return filteredData;
+}
+
+function buildTable(data){
+    var table = document.getElementById('myTable')
+    table.innerHTML = ''
+    for(var i=0; i<data.length; i++){
+        var row =   `<tr>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].username}</td>
+                            <td>${data[i].email}</td>
+                            <td>${data[i].street}</td>
+                            <td>${data[i].city}</td>
+                            <td>${data[i].birthdate}</td>
+                            <td>${data[i].age}</td>
+                     </tr>`
+                     table.innerHTML += row;
+    }
+}
+</script>
+</body>
+</html>
